@@ -23,7 +23,18 @@ function createBookmark (title , description , url) {
 }
 
 
-const bookmark = createBookmark("google", "description", "http://www.google.com")
+/* 
+ * Implemment a function to push a bookmark object into a user array
+ */
+ 
+function pushBookmark (userId , bookmark) {
+   const array = data[userId]
+    console.log(array)
+    array.push(bookmark)
+    console.log(array)
+}
 
+const bookmarkX = createBookmark("GOOGLE", "XXXXX", "URL");
 
-console.log(bookmark)
+pushBookmark("2", bookmarkX)
+pushBookmark("2", bookmarkX)
