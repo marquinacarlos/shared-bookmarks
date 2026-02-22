@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Bookmark</title>
+</head>
+<body>
+    <header>
+		<h1>Shared Bookmarks</h1>
+	</header>
+
+	<main>
+		<section>
+			<label for="user-select">Select a user</label>
+			<select id="user-select"></select>
+		</section>
+
+		<section>
+			<form id="bookmark-form">
+		<label for="bookmark-url">URL</label>
+		<input type ="url" id="bookmark-url" name="url" required>
+
+		<label for="bookmark-title">Title</label>
+		<input type="text" id="bookmark-title" name="title" required>
+
+		<label for="bookmark-description">Description</label>
+		<textarea id="bookmark-description" name="description" required></textarea>
+
+		<button type="submit">Add Bookmark</button>
+
+        <section id="bookmark-section"></section>
+	</main>
+
+		</form>
+		</section>
+</body>
+</html>
