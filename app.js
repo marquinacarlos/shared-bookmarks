@@ -1,16 +1,30 @@
 const data = {
-    "1" : [],    
-    "2" : [],    
-    "3" : [],    
-    "4" : [],    
-    "5" : [],    
+	"1" : [],
+	"2" : [],
+	"3" : [],
+	"4" : [],
+	"5" : [],
 }
+
+
+/** 
+ * Source - https://stackoverflow.com/a/2117523
+ * Funtion o generate a ramdon UUID
+*/
+function uuidv4() {
+  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+  );
+}
+
+
+
 
 
 //Create function to create each bookmarks
 function createBookmark (title , description , url) {
 	const bookmark = {
-		id : Date.now().toString(),
+		id : uuidv4(),
 		url : url,
 		title : title,
 		description : description,
@@ -30,20 +44,9 @@ function pushBookmark (userId , bookmark) {
 }
 
 
-pushBookmark("2", createBookmark("GOOGLE", "GGGGGG", "GOOGLE.COM"))
-pushBookmark("2", createBookmark("INSTAGRAM", "IGIGIGIG", "IG.COM"))
-pushBookmark("2", createBookmark("YAHOO", "YYYYYY", "YAHOOO.COM"))
+pushBookmark("2", createBookmark("GOOGLE", "XXXXX", "URL"))
+pushBookmark("2", createBookmark("INSTAGRAM", "IIIIIIII", "IG_URL"))
+pushBookmark("2", createBookmark("AAAA", "AAAA", "XX_.com"))
+console.log(data["2"])
 
-/*
- * Get bookmark by userId and bookmarkId
- */
-function getBookmark(userId, bookmarkId) {
-	return data[userId].find(item => item.id === bookmarkId);
-}
-
-
-
-console.log(
-	getBookmark("2", data["2"][1].id)
-)
 
