@@ -22,7 +22,6 @@ function uuidv4() {
 
 
 //Create function to create each bookmarks
-
 function createBookmark (title , description , url) {
 	const bookmark = {
 		id : uuidv4(),
