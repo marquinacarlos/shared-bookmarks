@@ -6,8 +6,7 @@ const data = {
 	"5" : [],
 }
 
-
-/** 
+/**
  * Source - https://stackoverflow.com/a/2117523
  * Funtion o generate a ramdon UUID
 */
@@ -17,11 +16,9 @@ function uuidv4() {
   );
 }
 
-
-
-
-
-//Create function to create each bookmarks
+/*
+ * Create function to create each bookmarks
+ */
 function createBookmark (title , description , url) {
 	const bookmark = {
 		id : uuidv4(),
@@ -43,10 +40,7 @@ function pushBookmark (userId , bookmark) {
 	array.push(bookmark)
 }
 
-
 pushBookmark("2", createBookmark("GOOGLE", "XXXXX", "URL"))
 pushBookmark("2", createBookmark("INSTAGRAM", "IIIIIIII", "IG_URL"))
 pushBookmark("2", createBookmark("AAAA", "AAAA", "XX_.com"))
 console.log(data["2"])
-
-
