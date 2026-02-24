@@ -77,3 +77,18 @@ incrementLike(testBookmark)
 incrementLike(testBookmark)
 console.log("Likes incremented: ");
 console.log(testBookmark)
+
+// Here start the DOM manipulation
+const users = Object.keys(data)
+console.log(users)
+const selectElmt = document.querySelector("#user-select")
+console.log(selectElmt);
+
+// inserting users to select tag
+users.forEach((user, index) => {
+	const optionElmt = document.createElement("option");
+	optionElmt.selected = (index === 0);
+	optionElmt.value = user;
+	optionElmt.text = user;
+	selectElmt.appendChild(optionElmt);
+});
