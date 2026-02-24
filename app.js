@@ -81,7 +81,8 @@ console.log(testBookmark)
 // Here start the DOM manipulation
 const users = Object.keys(data)
 console.log(users)
-const selectElmt = document.querySelector("#user-select")
+const selectElmt = document.querySelector("#user-select");
+const formElmt = document.querySelector("#bookmark-form");
 console.log(selectElmt);
 
 // inserting users to select tag
@@ -91,4 +92,21 @@ users.forEach((user, index) => {
 	optionElmt.value = user;
 	optionElmt.text = user;
 	selectElmt.appendChild(optionElmt);
+});
+
+// listen changes on select tag
+selectElmt.addEventListener("change", (event) => {
+	console.log(`You have changed the user with id: ${selectElmt.value}` )
+});
+
+console.log(formElmt)
+formElmt.addEventListener("submit", (event) => {
+	event.preventDefault();
+	const data = new FormData(event.target);
+	console.table({
+		url: data.get("url"),
+		title: data.get("title"),
+		description: data.get("description")
+	});
+	formElmt.reset();
 });
