@@ -44,3 +44,10 @@ pushBookmark("2", createBookmark("GOOGLE", "XXXXX", "URL"))
 pushBookmark("2", createBookmark("INSTAGRAM", "IIIIIIII", "IG_URL"))
 pushBookmark("2", createBookmark("AAAA", "AAAA", "XX_.com"))
 console.log(data["2"])
+
+function getBookmark(userID, bookmarkId) {
+	return data[userID].find(bookmark => bookmark.id === bookmarkId)
+}
+
+console.log("------------------------------------")
+console.log(getBookmark("2", data["2"][1].id));
