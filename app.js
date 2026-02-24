@@ -34,7 +34,7 @@ function createBookmark (title , description , url) {
 /* 
  * Implemment a function to push a bookmark object into a user array
  */
-function pushBookmark (userId , bookmark ,) {
+function pushBookmark (userId , bookmark) {
 	const array = data[userId]
 	array.push(bookmark)
 }
