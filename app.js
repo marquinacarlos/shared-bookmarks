@@ -56,8 +56,6 @@ console.log(getBookmark("2", data["2"][1].id));
 
 /*
  * Function to get likes from a bookmark
- * this function depends on getBookmark function to get a bookmark object first
- * then return the likes property
  */
 function getLikes(bookmark) {
 	return bookmark.likes;
@@ -67,6 +65,9 @@ const testBookmark = getBookmark("2", data["2"][1].id);
 console.log("------------------------------------");
 console.log("Likes: ", getLikes(testBookmark))
 
+/*
+ * this function hope to receive a bookmark object to increment the likes property 
+ */
 function incrementLike(bookmark) {
 	bookmark.likes++
 }
