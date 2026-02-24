@@ -67,12 +67,12 @@ const testBookmark = getBookmark("2", data["2"][1].id);
 console.log("------------------------------------");
 console.log("Likes: ", getLikes(testBookmark))
 
-function incrementLike(userId, bookmarkId) {
-	getBookmark(userId, bookmarkId).likes++
+function incrementLike(bookmark) {
+	bookmark.likes++
 }
 
 console.log("------------------------------------");
-incrementLike("2", data["2"][1].id)
-incrementLike("2", data["2"][1].id)
+incrementLike(testBookmark)
+incrementLike(testBookmark)
 console.log("Likes incremented: ");
-console.log(getBookmark("2", data["2"][1].id))
+console.log(testBookmark)
