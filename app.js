@@ -31,7 +31,6 @@ function createBookmark (title , description , url) {
 	return bookmark;
 }
 
-
 /* 
  * Implemment a function to push a bookmark object into a user array
  */
@@ -64,5 +63,15 @@ function getLikes(userId, bookmarkId) {
 	return getBookmark(userId, bookmarkId).likes;
 }
 
-console.log("------------------------------------")
+console.log("------------------------------------");
 console.log("Likes: ", getLikes("2", data["2"][1].id))
+
+function incrementLike(userId, bookmarkId) {
+	getBookmark(userId, bookmarkId).likes++
+}
+
+console.log("------------------------------------");
+incrementLike("2", data["2"][1].id)
+incrementLike("2", data["2"][1].id)
+console.log("Likes incremented: ");
+console.log(getBookmark("2", data["2"][1].id))
