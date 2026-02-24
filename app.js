@@ -6,7 +6,7 @@ const data = {
 	"5" : [],
 }
 
-/**
+/*
  * Source - https://stackoverflow.com/a/2117523
  * Funtion o generate a ramdon UUID
 */
@@ -45,9 +45,24 @@ pushBookmark("2", createBookmark("INSTAGRAM", "IIIIIIII", "IG_URL"))
 pushBookmark("2", createBookmark("AAAA", "AAAA", "XX_.com"))
 console.log(data["2"])
 
+/*
+ * function to get a bookmark by userId and bookmarkId
+ */
 function getBookmark(userID, bookmarkId) {
 	return data[userID].find(bookmark => bookmark.id === bookmarkId)
 }
 
 console.log("------------------------------------")
 console.log(getBookmark("2", data["2"][1].id));
+
+/*
+ * Function to get likes from a bookmark
+ * this function depends on getBookmark function to get a bookmark object first
+ * then return the likes property
+ */
+function getLikes(userId, bookmarkId) {
+	return getBookmark(userId, bookmarkId).likes;
+}
+
+console.log("------------------------------------")
+console.log("Likes: ", getLikes("2", data["2"][1].id))
