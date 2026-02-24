@@ -34,7 +34,7 @@ function createBookmark (title , description , url) {
 /* 
  * Implemment a function to push a bookmark object into a user array
  */
-function pushBookmark (userId , bookmark) {
+function pushBookmark (userId , bookmark ,) {
 	const array = data[userId]
 	array.push(bookmark)
 }
@@ -110,3 +110,72 @@ formElmt.addEventListener("submit", (event) => {
 	});
 	formElmt.reset();
 });
+
+
+
+//BOOKMARK-SECTION DISPLAYING USER BOOKMARKS
+
+// Dom element for bookmark-section
+ const bookmarkSection = document.querySelector("#bookmark-section");
+
+ //Render bookmark
+ function renderBookmarksForUser(userId) {
+  bookmarkSection.innerHTML = "";
+  const bookmarks = data[userId] || [];
+
+  if (bookmarks.length === 0) {
+    bookmarkSection.innerHTML = "<p>No bookmarks yet 👀</p>";
+    return;
+  }
+
+  bookmarks.forEach(b => {
+    const div = document.createElement("div");
+    div.className = "bookmark-item";
+    div.innerHTML = `
+      <h3>${b.title}</h3>
+      <a href="${b.url}" target="_blank">${b.url}</a>
+      <p>${b.description}</p>
+      <small>Likes: ${b.likes}</small>
+      <button data-id="${b.id}">❤️ Like</button>
+    `;
+
+    // Like button
+    div.querySelector("button").addEventListener("click", () => {
+      incrementLike(b);
+      renderBookmarksForUser(userId);
+    });
+
+    bookmarkSection.appendChild(div);
+  });
+}
+
+//Event Listerner
+
+// Change user → render their bookmarks
+selectElmt.addEventListener("change", () => {
+  renderBookmarksForUser(selectElmt.value);
+});
+
+// Submit form → add bookmark + render
+formElmt.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const userId = selectElmt.value;
+
+  const bookmark = createBookmark(
+    formData.get("title"),
+    formData.get("description"),
+    formData.get("url")
+  );
+
+  pushBookmark(userId, bookmark);
+  renderBookmarksForUser(userId);
+
+  formElmt.reset();
+});
+
+// Initial Render
+renderBookmarksForUser(selectElmt.value);
+
+ 
+
