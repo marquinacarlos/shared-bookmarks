@@ -59,19 +59,20 @@ console.log(getBookmark("2", data["2"][1].id));
  * this function depends on getBookmark function to get a bookmark object first
  * then return the likes property
  */
-function getLikes(userId, bookmarkId) {
-	return getBookmark(userId, bookmarkId).likes;
+function getLikes(bookmark) {
+	return bookmark.likes;
+}
+
+const testBookmark = getBookmark("2", data["2"][1].id);
+console.log("------------------------------------");
+console.log("Likes: ", getLikes(testBookmark))
+
+function incrementLike(bookmark) {
+	bookmark.likes++
 }
 
 console.log("------------------------------------");
-console.log("Likes: ", getLikes("2", data["2"][1].id))
-
-function incrementLike(userId, bookmarkId) {
-	getBookmark(userId, bookmarkId).likes++
-}
-
-console.log("------------------------------------");
-incrementLike("2", data["2"][1].id)
-incrementLike("2", data["2"][1].id)
+incrementLike(testBookmark)
+incrementLike(testBookmark)
 console.log("Likes incremented: ");
-console.log(getBookmark("2", data["2"][1].id))
+console.log(testBookmark)
