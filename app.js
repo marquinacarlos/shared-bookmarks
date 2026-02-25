@@ -1,35 +1,47 @@
-const data = {
-	"1" : [],
-	"2" : [
-		{
-			id: '7dbc706b-23d9-4718-b1d0-240efd2e1e89',
-			url: 'URL',
-			title: 'GOOGLE',
-			description: 'description',
-			createdAt: '2026-02-25T23:10:43.395Z',
-			likes: 0
-		},
-		{
-			id: '5d88f737-bd8a-4bb7-990f-e5fb2a549fca',
-			url: 'IG_URL',
-			title: 'INSTAGRAM',
-			description: 'IIIIIIII',
-			createdAt: '2026-02-25T23:10:43.401Z',
-			likes: 0
-		},
-	],
-	"3" : [],
-	"4" : [
-		{
-			id: '0481a6b4-8cd5-4973-9879-8a8433837fd3',
-			url: 'XX_.com',
-			title: 'AAAA',
-			description: 'AAAA',
-			createdAt: '2026-02-25T23:10:43.401Z',
-			likes: 0
-		}
-	],
-	"5" : [],
+// const data = {
+// 	"1" : [],
+// 	"2" : [
+// 		{
+// 			id: '7dbc706b-23d9-4718-b1d0-240efd2e1e89',
+// 			url: 'URL',
+// 			title: 'GOOGLE',
+// 			description: 'description',
+// 			createdAt: '2026-02-25T23:10:43.395Z',
+// 			likes: 0
+// 		},
+// 		{
+// 			id: '5d88f737-bd8a-4bb7-990f-e5fb2a549fca',
+// 			url: 'IG_URL',
+// 			title: 'INSTAGRAM',
+// 			description: 'IIIIIIII',
+// 			createdAt: '2026-02-25T23:10:43.401Z',
+// 			likes: 0
+// 		},
+// 	],
+// 	"3" : [],
+// 	"4" : [
+// 		{
+// 			id: '0481a6b4-8cd5-4973-9879-8a8433837fd3',
+// 			url: 'XX_.com',
+// 			title: 'AAAA',
+// 			description: 'AAAA',
+// 			createdAt: '2026-02-25T23:10:43.401Z',
+// 			likes: 0
+// 		}
+// 	],
+// 	"5" : [],
+// }
+
+import { getUserIds, setData } from './storage.js';
+
+/*
+ * Function to setup the data to localStorage
+ */
+function setInitialData() {
+	const users = getUserIds();
+	users.forEach((user) => {
+		setData(user, []);
+	});
 }
 
 /*
@@ -87,7 +99,7 @@ function incrementLike(bookmark) {
 }
 
 //* Here start the DOM manipulation
-const users = Object.keys(data)
+// const users = Object.keys(data)
 
 const selectElmt = document.querySelector("#user-select");
 const formElmt = document.querySelector("#bookmark-form");
@@ -158,3 +170,4 @@ function renderBookmarksForUser(userId) {
 }
 
 renderBookmarksForUser(selectElmt.value);
+setInitialData();
