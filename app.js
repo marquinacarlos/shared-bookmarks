@@ -1,8 +1,34 @@
 const data = {
 	"1" : [],
-	"2" : [],
+	"2" : [
+		{
+			id: '7dbc706b-23d9-4718-b1d0-240efd2e1e89',
+			url: 'URL',
+			title: 'GOOGLE',
+			description: 'description',
+			createdAt: '2026-02-25T23:10:43.395Z',
+			likes: 0
+		},
+		{
+			id: '5d88f737-bd8a-4bb7-990f-e5fb2a549fca',
+			url: 'IG_URL',
+			title: 'INSTAGRAM',
+			description: 'IIIIIIII',
+			createdAt: '2026-02-25T23:10:43.401Z',
+			likes: 0
+		},
+	],
 	"3" : [],
-	"4" : [],
+	"4" : [
+		{
+			id: '0481a6b4-8cd5-4973-9879-8a8433837fd3',
+			url: 'XX_.com',
+			title: 'AAAA',
+			description: 'AAAA',
+			createdAt: '2026-02-25T23:10:43.401Z',
+			likes: 0
+		}
+	],
 	"5" : [],
 }
 
@@ -39,20 +65,12 @@ function pushBookmark (userId , bookmark) {
 	array.push(bookmark)
 }
 
-pushBookmark("2", createBookmark("GOOGLE", "XXXXX", "URL"))
-pushBookmark("2", createBookmark("INSTAGRAM", "IIIIIIII", "IG_URL"))
-pushBookmark("2", createBookmark("AAAA", "AAAA", "XX_.com"))
-console.log(data["2"])
-
 /*
  * function to get a bookmark by userId and bookmarkId
  */
 function getBookmark(userID, bookmarkId) {
 	return data[userID].find(bookmark => bookmark.id === bookmarkId)
 }
-
-console.log("------------------------------------")
-console.log(getBookmark("2", data["2"][1].id));
 
 /*
  * Function to get likes from a bookmark
@@ -61,10 +79,6 @@ function getLikes(bookmark) {
 	return bookmark.likes;
 }
 
-const testBookmark = getBookmark("2", data["2"][1].id);
-console.log("------------------------------------");
-console.log("Likes: ", getLikes(testBookmark))
-
 /*
  * this function hope to receive a bookmark object to increment the likes property 
  */
@@ -72,20 +86,15 @@ function incrementLike(bookmark) {
 	bookmark.likes++
 }
 
-console.log("------------------------------------");
-incrementLike(testBookmark)
-incrementLike(testBookmark)
-console.log("Likes incremented: ");
-console.log(testBookmark)
-
-// Here start the DOM manipulation
+//* Here start the DOM manipulation
 const users = Object.keys(data)
-console.log(users)
+
 const selectElmt = document.querySelector("#user-select");
 const formElmt = document.querySelector("#bookmark-form");
-console.log(selectElmt);
+const bookmarkSection = document.querySelector("#bookmark-section");
 
-// inserting users to select tag
+
+//* inserting users to select tag
 users.forEach((user, index) => {
 	const optionElmt = document.createElement("option");
 	optionElmt.selected = (index === 0);
@@ -94,32 +103,31 @@ users.forEach((user, index) => {
 	selectElmt.appendChild(optionElmt);
 });
 
-// listen changes on select tag
+//* listen changes on select tag
 selectElmt.addEventListener("change", (event) => {
 	console.log(`You have changed the user with id: ${selectElmt.value}` )
+	renderBookmarksForUser(selectElmt.value);
 });
 
-console.log(formElmt)
 formElmt.addEventListener("submit", (event) => {
 	event.preventDefault();
-	const data = new FormData(event.target);
-	console.table({
-		url: data.get("url"),
-		title: data.get("title"),
-		description: data.get("description")
-	});
+	const formData = new FormData(event.target);
+	const userId = selectElmt.value;
+
+  const bookmark = createBookmark(
+    formData.get("title"),
+    formData.get("description"),
+    formData.get("url")
+  );
+	pushBookmark(userId, bookmark);
+  renderBookmarksForUser(userId);
 	formElmt.reset();
 });
 
-
-
-//BOOKMARK-SECTION DISPLAYING USER BOOKMARKS
-
-// Dom element for bookmark-section
- const bookmarkSection = document.querySelector("#bookmark-section");
-
- //Render bookmark
- function renderBookmarksForUser(userId) {
+/*
+ * Render bookmark
+ */
+function renderBookmarksForUser(userId) {
   bookmarkSection.innerHTML = "";
   const bookmarks = data[userId] || [];
 
@@ -128,20 +136,20 @@ formElmt.addEventListener("submit", (event) => {
     return;
   }
 
-  bookmarks.forEach(b => {
+  bookmarks.forEach(bookmark => {
     const div = document.createElement("div");
     div.className = "bookmark-item";
     div.innerHTML = `
-      <h3>${b.title}</h3>
-      <a href="${b.url}" target="_blank">${b.url}</a>
-      <p>${b.description}</p>
-      <small>Likes: ${b.likes}</small>
-      <button data-id="${b.id}">❤️ Like</button>
+      <h3>${bookmark.title}</h3>
+      <a href="${bookmark.url}" target="_blank">${bookmark.url}</a>
+      <p>${bookmark.description}</p>
+      <small>Likes: ${bookmark.likes}</small>
+      <button data-id="${bookmark.id}">❤️ Like</button>
     `;
 
     // Like button
     div.querySelector("button").addEventListener("click", () => {
-      incrementLike(b);
+      incrementLike(bookmark);
       renderBookmarksForUser(userId);
     });
 
@@ -149,33 +157,4 @@ formElmt.addEventListener("submit", (event) => {
   });
 }
 
-//Event Listerner
-
-// Change user → render their bookmarks
-selectElmt.addEventListener("change", () => {
-  renderBookmarksForUser(selectElmt.value);
-});
-
-// Submit form → add bookmark + render
-formElmt.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const formData = new FormData(event.target);
-  const userId = selectElmt.value;
-
-  const bookmark = createBookmark(
-    formData.get("title"),
-    formData.get("description"),
-    formData.get("url")
-  );
-
-  pushBookmark(userId, bookmark);
-  renderBookmarksForUser(userId);
-
-  formElmt.reset();
-});
-
-// Initial Render
 renderBookmarksForUser(selectElmt.value);
-
- 
-
