@@ -90,9 +90,9 @@ function getBookmark(userID, bookmarkId) {
 /*
  * Function to get likes from a bookmark
  */
-function getLikes(bookmark) {
-	return bookmark.likes;
-}
+// function getLikes(bookmark) {
+// 	return bookmark.likes;
+// }
 
 // todo -> we have to see this function in the future
 /*
