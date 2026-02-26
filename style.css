@@ -1,0 +1,169 @@
+/* 🌿 Simple & Minimal Styling */
+
+:root {
+  --bg: #d1cfe2;
+  --card: #ffffff;
+  --border: #ddd;
+  --text: #111;
+  --muted: #555;
+  --accent: #e9690e;
+  --like: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  padding: 2rem 1rem;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Main container */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+/* Sections */
+main > section {
+  margin-bottom: 1.5rem;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+/* Inputs */
+#user-select,
+#bookmark-form input,
+#bookmark-form textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  margin-bottom: 0.5rem;
+}
+
+#bookmark-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+#user-select:focus,
+#bookmark-form input:focus,
+#bookmark-form textarea:focus {
+  border-color: var(--accent);
+}
+
+/* Form button */
+#bookmark-form button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.15s ease;
+}
+
+#bookmark-form button:hover {
+  opacity: 0.9;
+}
+
+/* Bookmark grid */
+#bookmark-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Bookmark card */
+.bookmark-item {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bookmark-item h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.bookmark-item a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+  word-break: break-word;
+}
+
+.bookmark-item a:hover {
+  text-decoration: underline;
+}
+
+.bookmark-item p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.bookmark-item small {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Like button */
+.bookmark-item button {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--like);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.bookmark-item button:hover {
+  background: #fee2e2;
+}
+
+/* Empty state */
+#bookmark-section p {
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+}
