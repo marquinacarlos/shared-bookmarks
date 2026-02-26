@@ -1,3 +1,4 @@
+//! Don't remove this mock data
 // const data = {
 // 	"1" : [],
 // 	"2" : [
@@ -85,20 +86,22 @@ function getBookmark(userID, bookmarkId) {
 	return data[userID].find(bookmark => bookmark.id === bookmarkId)
 }
 
-//todo -> we can remove it this function
+//todo -> we can remove this function becouse we don't need it for now
 /*
  * Function to get likes from a bookmark
  */
-function getLikes(bookmark) {
-	return bookmark.likes;
-}
+// function getLikes(bookmark) {
+// 	return bookmark.likes;
+// }
 
+// todo -> we have to see this function in the future
 /*
  * this function hope to receive a bookmark object to increment the likes property 
  */
-function incrementLike(bookmark) {
-	bookmark.likes++
-}
+// function incrementLike(bookmark) {
+// 	bookmark.likes++
+// 	setData()
+// }
 
 //* Here start the DOM manipulation
 const users = getUserIds()
@@ -106,7 +109,6 @@ const users = getUserIds()
 const selectElmt = document.querySelector("#user-select");
 const formElmt = document.querySelector("#bookmark-form");
 const bookmarkSection = document.querySelector("#bookmark-section");
-
 
 //* inserting users to select tag
 users.forEach((user, index) => {
@@ -161,9 +163,16 @@ function renderBookmarksForUser(userId) {
       <button data-id="${bookmark.id}">❤️ Like</button>
     `;
 
-    // Like button
+    //* Like button
     div.querySelector("button").addEventListener("click", () => {
-      incrementLike(bookmark);
+			const array = getData(userId);
+			const newData = array.map((bmk => {
+				if(bmk.id === bookmark.id) {
+					bmk.likes++
+				}
+				return bmk;
+			}));
+			setData(userId, newData);
       renderBookmarksForUser(userId);
     });
 
