@@ -85,7 +85,8 @@ function pushBookmark (userId , bookmark) {
  * function to get a bookmark by userId and bookmarkId
  */
 function getBookmark(userID, bookmarkId) {
-	return data[userID].find(bookmark => bookmark.id === bookmarkId)
+	const bookmarks = getData(userID);
+	return bookmarks.find(bookmark => bookmark.id === bookmarkId)
 }
 
 //todo -> we can remove this function becouse we don't need it for now
