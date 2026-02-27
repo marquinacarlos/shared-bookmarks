@@ -41,7 +41,9 @@ import { getUserIds, setData, getData } from './storage.js';
 function setInitialData() {
 	const users = getUserIds();
 	users.forEach((user) => {
-		setData(user, []);
+		if (getData(user) === null) {
+			setData(user, []);
+		}
 	});
 }
 
@@ -53,6 +55,56 @@ function uuidv4() {
   return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
     (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
   );
+}
+
+/**
+ * Trims leading and trailing whitespace from a string value.
+ */
+function sanitizeInput(value) {
+	return value.trim();
+}
+
+/**
+ * Prepends https:// to a URL if no protocol is present.
+ */
+function normalizeUrl(url) {
+	if (!/^https?:\/\//i.test(url)) {
+		return `https://${url}`;
+	}
+	return url;
+}
+
+/**
+ * Checks if a string is a valid URL with http or https protocol.
+ */
+function isValidUrl(url) {
+	try {
+		const parsed = new URL(url);
+		const hasValidProtocol = parsed.protocol === "http:" || parsed.protocol === "https:";
+		const hasValidDomain = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test(parsed.hostname);
+		return hasValidProtocol && hasValidDomain;
+	} catch {
+		return false;
+	}
+}
+
+/**
+ * Validates that title, description, and URL are not empty and the URL is valid.
+ */
+function validateForm(title, description, url) {
+	if (title === "") {
+		alert("Title cannot be empty.");
+		return false;
+	}
+	if (description === "") {
+		alert("Description cannot be empty.");
+		return false;
+	}
+	if (!isValidUrl(url)) {
+		alert("Please enter a valid URL.");
+		return false;
+	}
+	return true;
 }
 
 /*
@@ -129,11 +181,15 @@ formElmt.addEventListener("submit", (event) => {
 	const formData = new FormData(event.target);
 	const userId = selectElmt.value;
 
-  const bookmark = createBookmark(
-    formData.get("title"),
-    formData.get("description"),
-    formData.get("url")
-  );
+	const title = sanitizeInput(formData.get("title"));
+	const description = sanitizeInput(formData.get("description"));
+	const url = normalizeUrl(sanitizeInput(formData.get("url")));
+
+	if (!validateForm(title, description, url)) {
+		return;
+	}
+
+  const bookmark = createBookmark(title, description, url);
 	pushBookmark(userId, bookmark);
   renderBookmarksForUser(userId);
 	formElmt.reset();
@@ -180,5 +236,5 @@ function renderBookmarksForUser(userId) {
   });
 }
 
-renderBookmarksForUser(selectElmt.value);
 setInitialData();
+renderBookmarksForUser(selectElmt.value);
