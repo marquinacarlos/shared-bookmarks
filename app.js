@@ -62,6 +62,16 @@ function sanitizeInput(value) {
 	return value.trim();
 }
 
+/**
+ * Prepends https:// to a URL if no protocol is present.
+ */
+function normalizeUrl(url) {
+	if (!/^https?:\/\//i.test(url)) {
+		return `https://${url}`;
+	}
+	return url;
+}
+
 /*
  * Create function to create each bookmarks
  */
@@ -138,7 +148,7 @@ formElmt.addEventListener("submit", (event) => {
 
 	const title = sanitizeInput(formData.get("title"));
 	const description = sanitizeInput(formData.get("description"));
-	const url = sanitizeInput(formData.get("url"));
+	const url = normalizeUrl(sanitizeInput(formData.get("url")));
 
   const bookmark = createBookmark(title, description, url);
 	pushBookmark(userId, bookmark);
