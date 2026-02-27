@@ -55,6 +55,13 @@ function uuidv4() {
   );
 }
 
+/**
+ * Trims leading and trailing whitespace from a string value.
+ */
+function sanitizeInput(value) {
+	return value.trim();
+}
+
 /*
  * Create function to create each bookmarks
  */
@@ -129,11 +136,11 @@ formElmt.addEventListener("submit", (event) => {
 	const formData = new FormData(event.target);
 	const userId = selectElmt.value;
 
-  const bookmark = createBookmark(
-    formData.get("title"),
-    formData.get("description"),
-    formData.get("url")
-  );
+	const title = sanitizeInput(formData.get("title"));
+	const description = sanitizeInput(formData.get("description"));
+	const url = sanitizeInput(formData.get("url"));
+
+  const bookmark = createBookmark(title, description, url);
 	pushBookmark(userId, bookmark);
   renderBookmarksForUser(userId);
 	formElmt.reset();
