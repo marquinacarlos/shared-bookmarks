@@ -128,14 +128,15 @@ function createBookmark (title , description , url) {
 function pushBookmark (userId , bookmark) {
 	const array = getData(userId);
 	array.push(bookmark);
-	setData(selectElmt.value, array)
+	setData(userId, array)
 }
 
 /*
  * function to get a bookmark by userId and bookmarkId
  */
 function getBookmark(userID, bookmarkId) {
-	return data[userID].find(bookmark => bookmark.id === bookmarkId)
+	const bookmarks = getData(userID);
+	return bookmarks.find(bookmark => bookmark.id === bookmarkId)
 }
 
 //todo -> we can remove this function becouse we don't need it for now
