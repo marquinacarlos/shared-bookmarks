@@ -41,7 +41,9 @@ import { getUserIds, setData, getData } from './storage.js';
 function setInitialData() {
 	const users = getUserIds();
 	users.forEach((user) => {
-		setData(user, []);
+		if (getData(user) === null) {
+			setData(user, []);
+		}
 	});
 }
 
@@ -180,5 +182,5 @@ function renderBookmarksForUser(userId) {
   });
 }
 
-renderBookmarksForUser(selectElmt.value);
 setInitialData();
+renderBookmarksForUser(selectElmt.value);
