@@ -193,6 +193,7 @@ function renderBookmarksForUser(userId) {
       renderBookmarksForUser(userId);
     });
 
+		//Delete Buttion 
 	   div.querySelector(".delete-btn").addEventListener("click", () => {
       const ok = confirm("Delete this bookmark?");
       if (!ok) return;
