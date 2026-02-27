@@ -71,6 +71,7 @@ label {
   margin-bottom: 0.5rem;
 }
 
+
 #bookmark-form textarea {
   min-height: 80px;
   resize: vertical;
@@ -84,18 +85,25 @@ label {
 
 /* Form button */
 #bookmark-form button {
+  width: 100%;
   padding: 0.5rem 1rem;
-  border-radius: 999px;
+  border-radius: 6px;
   border: none;
   background: var(--accent);
-  color: #fff;
+  background-color:#c2410c;
+  color: #ffffff;
   cursor: pointer;
-  font-weight: 600;
-  transition: opacity 0.15s ease;
+  font-weight: 700;
+  font-size: 20px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+  #bookmark-form button:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
 }
 
 #bookmark-form button:hover {
-  opacity: 0.9;
+  filter: brightness(0.95);
 }
 
 /* Bookmark grid */
