@@ -72,6 +72,37 @@ function normalizeUrl(url) {
 	return url;
 }
 
+/**
+ * Checks if a string is a valid URL with http or https protocol.
+ */
+function isValidUrl(url) {
+	try {
+		const parsed = new URL(url);
+		return parsed.protocol === "http:" || parsed.protocol === "https:";
+	} catch {
+		return false;
+	}
+}
+
+/**
+ * Validates that title, description, and URL are not empty and the URL is valid.
+ */
+function validateForm(title, description, url) {
+	if (title === "") {
+		alert("Title cannot be empty.");
+		return false;
+	}
+	if (description === "") {
+		alert("Description cannot be empty.");
+		return false;
+	}
+	if (!isValidUrl(url)) {
+		alert("Please enter a valid URL.");
+		return false;
+	}
+	return true;
+}
+
 /*
  * Create function to create each bookmarks
  */
@@ -149,6 +180,10 @@ formElmt.addEventListener("submit", (event) => {
 	const title = sanitizeInput(formData.get("title"));
 	const description = sanitizeInput(formData.get("description"));
 	const url = normalizeUrl(sanitizeInput(formData.get("url")));
+
+	if (!validateForm(title, description, url)) {
+		return;
+	}
 
   const bookmark = createBookmark(title, description, url);
 	pushBookmark(userId, bookmark);
