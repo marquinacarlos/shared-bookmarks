@@ -158,6 +158,8 @@ function renderBookmarksForUser(userId) {
     return;
   }
 
+
+
   const sorted = [...bookmarks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   sorted.forEach(bookmark => {
@@ -170,6 +172,7 @@ function renderBookmarksForUser(userId) {
       <small>Likes: ${bookmark.likes}</small>
       <button class="like-btn" data-id="${bookmark.id}">❤️ Like</button>
       <button class="copy-btn">📋 Copy URL</button>
+	  <button class="delete-btn">🗑️ Delete</button>
     `;
 
     //* Copy URL button
@@ -187,6 +190,18 @@ function renderBookmarksForUser(userId) {
 				return bmk;
 			}));
 			setData(userId, newData);
+      renderBookmarksForUser(userId);
+    });
+
+		//Delete Buttion 
+	   div.querySelector(".delete-btn").addEventListener("click", () => {
+      const ok = confirm("Delete this bookmark?");
+      if (!ok) return;
+
+      const array = getData(userId) || [];
+      const newData = array.filter(bmk => bmk.id !== bookmark.id);
+
+      setData(userId, newData);
       renderBookmarksForUser(userId);
     });
 
