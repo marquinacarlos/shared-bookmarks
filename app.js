@@ -158,7 +158,9 @@ function renderBookmarksForUser(userId) {
     return;
   }
 
-  bookmarks.forEach(bookmark => {
+  const sorted = [...bookmarks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  sorted.forEach(bookmark => {
     const div = document.createElement("div");
     div.className = "bookmark-item";
     div.innerHTML = `
