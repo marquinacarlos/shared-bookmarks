@@ -224,11 +224,17 @@ function renderBookmarksForUser(userId) {
       <a href="${bookmark.url}" target="_blank">${bookmark.url}</a>
       <p>${bookmark.description}</p>
       <small>Likes: ${bookmark.likes}</small>
-      <button data-id="${bookmark.id}">❤️ Like</button>
+      <button class="like-btn" data-id="${bookmark.id}">❤️ Like</button>
+      <button class="copy-btn">📋 Copy URL</button>
     `;
 
+    //* Copy URL button
+    div.querySelector(".copy-btn").addEventListener("click", () => {
+      copyToClipboard(bookmark.url);
+    });
+
     //* Like button
-    div.querySelector("button").addEventListener("click", () => {
+    div.querySelector(".like-btn").addEventListener("click", () => {
 			const array = getData(userId);
 			const newData = array.map((bmk => {
 				if(bmk.id === bookmark.id) {
