@@ -170,6 +170,7 @@ function renderBookmarksForUser(userId) {
       <small>Likes: ${bookmark.likes}</small>
       <button class="like-btn" data-id="${bookmark.id}">❤️ Like</button>
       <button class="copy-btn">📋 Copy URL</button>
+	  <button class="delete-btn">🗑️ Delete</button>
     `;
 
     //* Copy URL button
