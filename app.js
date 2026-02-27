@@ -78,7 +78,7 @@ function createBookmark (title , description , url) {
 function pushBookmark (userId , bookmark) {
 	const array = getData(userId);
 	array.push(bookmark);
-	setData(selectElmt.value, array)
+	setData(userId, array)
 }
 
 /*
