@@ -41,7 +41,9 @@ import { getUserIds, setData, getData } from './storage.js';
 function setInitialData() {
 	const users = getUserIds();
 	users.forEach((user) => {
-		setData(user, []);
+		if (getData(user) === null) {
+			setData(user, []);
+		}
 	});
 }
 
@@ -55,14 +57,14 @@ function uuidv4() {
   );
 }
 
-/**
+/*
  * Trims leading and trailing whitespace from a string value.
  */
 function sanitizeInput(value) {
 	return value.trim();
 }
 
-/**
+/*
  * Prepends https:// to a URL if no protocol is present.
  */
 function normalizeUrl(url) {
@@ -72,7 +74,7 @@ function normalizeUrl(url) {
 	return url;
 }
 
-/**
+/*
  * Checks if a string is a valid URL with http or https protocol.
  */
 function isValidUrl(url) {
@@ -86,7 +88,7 @@ function isValidUrl(url) {
 	}
 }
 
-/**
+/*
  * Validates that title, description, and URL are not empty and the URL is valid.
  */
 function validateForm(title, description, url) {
@@ -234,5 +236,5 @@ function renderBookmarksForUser(userId) {
   });
 }
 
-renderBookmarksForUser(selectElmt.value);
 setInitialData();
+renderBookmarksForUser(selectElmt.value);
