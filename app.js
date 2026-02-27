@@ -158,6 +158,8 @@ function renderBookmarksForUser(userId) {
     return;
   }
 
+
+
   const sorted = [...bookmarks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   sorted.forEach(bookmark => {
@@ -188,6 +190,17 @@ function renderBookmarksForUser(userId) {
 				return bmk;
 			}));
 			setData(userId, newData);
+      renderBookmarksForUser(userId);
+    });
+
+	   div.querySelector(".delete-btn").addEventListener("click", () => {
+      const ok = confirm("Delete this bookmark?");
+      if (!ok) return;
+
+      const array = getData(userId) || [];
+      const newData = array.filter(bmk => bmk.id !== bookmark.id);
+
+      setData(userId, newData);
       renderBookmarksForUser(userId);
     });
 
