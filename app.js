@@ -156,6 +156,13 @@ function getBookmark(userID, bookmarkId) {
 // 	setData()
 // }
 
+/**
+ * Copies a given text value to the clipboard.
+ */
+function copyToClipboard(value) {
+	navigator.clipboard.writeText(value);
+}
+
 //* Here start the DOM manipulation
 const users = getUserIds()
 
