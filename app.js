@@ -78,7 +78,9 @@ function normalizeUrl(url) {
 function isValidUrl(url) {
 	try {
 		const parsed = new URL(url);
-		return parsed.protocol === "http:" || parsed.protocol === "https:";
+		const hasValidProtocol = parsed.protocol === "http:" || parsed.protocol === "https:";
+		const hasValidDomain = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test(parsed.hostname);
+		return hasValidProtocol && hasValidDomain;
 	} catch {
 		return false;
 	}
