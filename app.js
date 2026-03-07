@@ -1,38 +1,3 @@
-//! Don't remove this mock data
-// const data = {
-// 	"1" : [],
-// 	"2" : [
-// 		{
-// 			id: '7dbc706b-23d9-4718-b1d0-240efd2e1e89',
-// 			url: 'URL',
-// 			title: 'GOOGLE',
-// 			description: 'description',
-// 			createdAt: '2026-02-25T23:10:43.395Z',
-// 			likes: 0
-// 		},
-// 		{
-// 			id: '5d88f737-bd8a-4bb7-990f-e5fb2a549fca',
-// 			url: 'IG_URL',
-// 			title: 'INSTAGRAM',
-// 			description: 'IIIIIIII',
-// 			createdAt: '2026-02-25T23:10:43.401Z',
-// 			likes: 0
-// 		},
-// 	],
-// 	"3" : [],
-// 	"4" : [
-// 		{
-// 			id: '0481a6b4-8cd5-4973-9879-8a8433837fd3',
-// 			url: 'XX_.com',
-// 			title: 'AAAA',
-// 			description: 'AAAA',
-// 			createdAt: '2026-02-25T23:10:43.401Z',
-// 			likes: 0
-// 		}
-// 	],
-// 	"5" : [],
-// }
-
 import { getUserIds, setData, getData } from './storage.js';
 import { uuidv4, createBookmark, pushBookmark, getBookmark } from './bookmarks.js';
 
@@ -48,14 +13,14 @@ function setInitialData() {
 	});
 }
 
-/**
+/*
  * Trims leading and trailing whitespace from a string value.
  */
 function sanitizeInput(value) {
 	return value.trim();
 }
 
-/**
+/*
  * Prepends https:// to a URL if no protocol is present.
  */
 function normalizeUrl(url) {
@@ -65,7 +30,7 @@ function normalizeUrl(url) {
 	return url;
 }
 
-/**
+/*
  * Checks if a string is a valid URL with http or https protocol.
  */
 function isValidUrl(url) {
@@ -79,7 +44,7 @@ function isValidUrl(url) {
 	}
 }
 
-/**
+/*
  * Validates that title, description, and URL are not empty and the URL is valid.
  */
 function validateForm(title, description, url) {
@@ -98,7 +63,7 @@ function validateForm(title, description, url) {
 	return true;
 }
 
-/**
+/*
  * Copies a given text value to the clipboard.
  */
 function copyToClipboard(value) {
