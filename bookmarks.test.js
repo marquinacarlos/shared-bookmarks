@@ -1,44 +1,3 @@
-/**
- * Jest methods and functions used in this test file:
- *
- * 1. jest.mock('./storage.js') - Replaces all functions exported from storage.js
- *    with fake (mock) functions that do nothing. The real localStorage is never touched.
- *
- * 2. beforeEach(() => { ... }) - Runs the given callback before each individual test.
- *    Used here to reset all mocks so each test starts fresh.
- *
- * 3. jest.clearAllMocks() - Clears the call history of all mock functions
- *    (how many times they were called, with what arguments, etc.).
- *
- * 4. describe(name, fn) - Groups related tests under a label.
- *    It does not affect test behavior, only organizes output.
- *
- * 5. test(name, fn) - Defines a single test case. The name describes
- *    what the test verifies, and the function contains the assertions.
- *
- * 6. expect(value) - Wraps a value to make assertions about it.
- *    It returns an object with matcher methods like .toBe(), .toMatch(), etc.
- *
- * 7. .toBe(expected) - Asserts that the value is strictly equal (===) to expected.
- *
- * 8. .toMatch(regex) - Asserts that a string matches the given regular expression.
- *
- * 9. .toHaveProperty(key, value?) - Asserts that an object has the given property,
- *    and optionally checks that the property equals the given value.
- *
- * 10. .toEqual(expected) - Asserts deep equality (compares all properties recursively),
- *     unlike .toBe() which checks reference equality.
- *
- * 11. .toBeUndefined() - Asserts that the value is undefined.
- *
- * 12. mockReturnValue(value) - Tells a mock function: "when someone calls you,
- *     return this value". The real function is never executed.
- *
- * 13. toHaveBeenCalledWith(arg1, arg2, ...) - Asserts that a mock function
- *     was called with exactly these arguments. Used to verify that internal
- *     logic passed the correct data to its dependencies.
- */
-
 import { createBookmark, pushBookmark, getBookmark } from './bookmarks.js';
 import { getData, setData } from './storage.js';
 
@@ -67,7 +26,7 @@ describe('createBookmark', () => {
 		expect(bookmark1.id).not.toBe(bookmark2.id);
 	});
 
-	test('should set createdAt as a valid ISO date', () => {
+	test('should set createdAt as a valid ISO date', () => { // ISO -> means 
 		const bookmark = createBookmark('Test', 'Desc', 'https://test.com');
 		expect(new Date(bookmark.createdAt).toISOString()).toBe(bookmark.createdAt);
 	});
